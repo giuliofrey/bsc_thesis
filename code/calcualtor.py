@@ -7,9 +7,9 @@ import time
 
 #Importing datasets
 
-mm_df=pd.read_csv('../mm_dataset.csv')
+mm_df=pd.read_csv('../outputs/mm_dataset.csv')
 mm_df = mm_df.replace('not found', np.nan)
-services_df=pd.read_csv('../services_df.csv')
+services_df=pd.read_csv('../outputs/services_df.csv')
 dd_dict=mm_df[['CODICE EDIFICIO', 'lat', 'lon']].set_index('CODICE EDIFICIO').T.to_dict('list')
 
 # ignore warnings
@@ -40,7 +40,7 @@ dd_dict=check_duplicate_values(dd_dict)
 def get_route(pickup_lon, pickup_lat, dropoff_lon, dropoff_lat):
     # car, bike or foot
     loc = "{},{};{},{}".format(pickup_lon, pickup_lat, dropoff_lon, dropoff_lat)
-    url = "http://127.0.0.1:5000/route/v1/driving/"
+    url = "http://127.0.0.1:5000/route/v1/walking/"
     r = requests.get(url + loc)
     if r.status_code!= 200:
         return {}
@@ -75,14 +75,14 @@ def find_loc(index):
 
 def main():
     try:
-        calc_df=pd.read_csv('../calc_dataset.csv')
+        calc_df=pd.read_csv('../outputs/calc_dataset.csv')
     except:
         calc_df=pd.DataFrame(columns=services_df.columns)
     last_row=len(calc_df)
     print("Rows to be calculated",len(services_df)-last_row,"(",round(last_row/len(services_df)*100,3),'%)')
-    n=5 #save csv file every n rows
+    n=20 #save csv file every n rows
     try:
-        last_row_txt= pickle.load(open("../row_file", "rb"))
+        last_row_txt= pickle.load(open("../outputs/row_file", "rb"))
     except:
         last_row_txt=0
     if  last_row != last_row_txt:
@@ -95,8 +95,8 @@ def main():
         calc_df=pd.concat([calc_df, calc_df_last])
         calc_df = calc_df.reset_index(drop=True)
         if last_row%n==0:
-            calc_df.to_csv('calc_dataset.csv', index=False)
-            pickle.dump(last_row + 1, open("../row_file", "wb"))
+            calc_df.to_csv('../outputs/calc_dataset.csv', index=False)
+            pickle.dump(last_row + 1, open("../outputs/row_file", "wb"))
             print("Saving dataset to .csv")
         last_row=last_row+1
         t1 = time.time()
