@@ -7,9 +7,11 @@ import time
 
 #Importing datasets
 
+df=str(input('Which dataset do you want to fix?'))
+
 mm_df=pd.read_csv('../outputs/mm_dataset.csv')
 mm_df = mm_df.replace('not found', np.nan)
-services_df=pd.read_csv('../outputs/services_df.csv')
+services_df=pd.read_csv('../outputs/'+df)
 dd_dict=mm_df[['CODICE EDIFICIO', 'lat', 'lon']].set_index('CODICE EDIFICIO').T.to_dict('list')
 
 # ignore warnings
@@ -75,7 +77,7 @@ def find_loc(index):
 
 def main():
     try:
-        calc_df=pd.read_csv('../outputs/calc_dataset.csv')
+        calc_df=pd.read_csv('../outputs/fixed_dataset.csv')
     except:
         calc_df=pd.DataFrame(columns=services_df.columns)
     last_row=len(calc_df)
@@ -95,14 +97,14 @@ def main():
         calc_df=pd.concat([calc_df, calc_df_last])
         calc_df = calc_df.reset_index(drop=True)
         if last_row%n==0:
-            calc_df.to_csv('../outputs/calc_dataset.csv', index=False)
+            calc_df.to_csv('../outputs/fixed_dataset.csv', index=False)
             pickle.dump(last_row + 1, open("../outputs/row_file", "wb"))
             print("Saving dataset to .csv")
         last_row=last_row+1
         t1 = time.time()
         print('Calculated correctly row', last_row, "in ", round(t1-t0, 3), 'seconds')
 
-    calc_df.to_csv('../outputs/calc_dataset.csv', index=False)
+    calc_df.to_csv('../outputs/fixed_dataset.csv', index=False)
     pickle.dump(last_row + 1, open("../outputs/row_file", "wb"))
     input('All done! Press ENTER to exit')
 
