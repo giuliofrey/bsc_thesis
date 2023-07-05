@@ -4,13 +4,21 @@ This is the repository for the Undergraduate Thesis of Giulio Frey.
 
 ## Aim of the project
 
-We want to analyse how connected are different public housing with essential services around the city of Milan. 
+We want to analyze how connected are different public housing with essential services around the city of Milan. 
 
 ## Contents
 
-* data_cleaning.ipynb: creates the datasets for essencial services around the city. 
-* mm_dataset.ipynb: creates the social housing dataset. Converts the pdf provided by MM in a .csv file and the geoencodes the adresses 
-* tt_matrix.ipynb: calculates the time distance matrix between social housing and essencial services
+### code 
+
+This folder contains all the code that is used in the project. The main task are the creation of the distance matrix using OSRM and subsequent analysis. 
+
+* analysis.ipynb: performs the analysis
+* data_cleaning.ipynb: creates the datasets for essential services around the city. 
+* calculator.py: constructs the distance matrix using OSRM 
+* calculator_fixer.py: constructs the distance matrix using OSRM but only of one specific dataset. It was necessary as we faced geoencoding issues with one dataset.
+* merger.ipynb: merges the fixed dataset with all the others.
+* mm_geofactor.ipynb: creates the social housing dataset. Converts the pdf provided by MM in a .csv file and the geoencodes the addresses 
+* tt_matrix.ipynb: experimeents in calculating the time distance matrix between social housing and essential services using OSRM
 * visual.ipynb: creates visual to support the analysis
 
 ## Data sources
