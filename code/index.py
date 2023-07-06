@@ -77,7 +77,7 @@ def main():
     index_df['list']=index_df['CODICE EDIFICIO'].progress_apply(lambda x: fun_run(x, dhat=60*15, alpha=0.5, beta=0.5, out_df=index_df))
     list_df=pd.DataFrame(index_df['list'].to_list(), columns = columns_list)
     index_df = pd.concat([index_df, list_df], axis=1)
-    index_df.to_csv('../outputs/index_df', index=False)
+    index_df.to_csv('../outputs/index_df.csv', index=False)
     print('Done!')
 
 main()
