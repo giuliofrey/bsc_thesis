@@ -1,4 +1,4 @@
-# mm_tesi
+# Understanding accessibility to basic services for public housing in Milan: An open source approach
 
 This is the repository for the Undergraduate Thesis of Giulio Frey.
 
