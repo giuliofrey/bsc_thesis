@@ -6,11 +6,16 @@ This is the repository for the Undergraduate Thesis of Giulio Frey.
 
 We want to analyze how connected are different public housing with essential services around the city of Milan. 
 
+## Abstract
+
+We propose a connectivity index built using fully open-source tools to evaluate the accessibility to basic services of the public housing stock owned by Comune di Milano. Our approach is scalable to other cities, fully reproducible and has negligible costs of implementation. We cover the inner workings of the routing machine necessary to build the index, qualitatively describe the housing stock and go over a comprehensive history of public housing institutions. Results of the connectivity index are analyzed using the Gini index, correlation and mutual information with distance from the city center. We find that most services are quite equally distributed among the public housing units when
+looking at the Gini index. All services are negatively correlated with distance from the city center and university buildings and cultural points of interest have the highest values of Mutual information.
+
 ## Contents
 
 ### code 
 
-This folder contains all the code that is used in the project. The main task are the creation of the distance matrix using OSRM and subsequent analysis. 
+This folder contains all the code that is used in the project. The main task is the creation of the distance matrix using OSRM and subsequent analysis. 
 
 * [analysis.ipynb](code/analysis.ipynb): performs the analysis
 * [data_cleaning.ipynb](code/data_cleaning.ipynb): creates the datasets for essential services around the city. 
